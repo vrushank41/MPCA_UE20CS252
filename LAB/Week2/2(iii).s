@@ -1,0 +1,21 @@
+.TEXT
+LDR R0, =A
+LDR R1, =B
+LDR R3,[R1]
+MOV R4,#1
+
+L:  
+    LDRB R2,[R0]
+    ADD R3,R3,R2
+    ADD R0,R0,#4
+    ADD R4,R4,#1
+    CMP R4,#11
+    BNE L
+
+    STRB R3,[R1]
+
+SWI 0X011
+
+.DATA
+A: .BYTE 10,20,30,40,50,60,70,80,90,100
+B: .BYTE 0

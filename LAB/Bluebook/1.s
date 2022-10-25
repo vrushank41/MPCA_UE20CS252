@@ -1,0 +1,30 @@
+.DATA
+A:.WORD 2,6,5,4,8,9,1
+B:.WORD 1
+YES:.ASCII "Successful search"
+NO:.ASCII "Unsuccessful search"
+
+.TEXT
+LDR R0,=A
+LDR R1,=B
+LDR R2,[R0]
+LDR R3,[R1]
+LDR R11,=YES
+LDR R12,=NO
+MOV R4,#7
+
+LOOP:LDR R5,[R2,#4]!
+	CMP R5,R1
+	BNE LOOP
+	SUB R4,R4,#1
+	BEQ S
+
+S:YES
+  
+  
+
+U:NO
+  SWI 0X02
+  
+
+.END	

@@ -1,0 +1,28 @@
+.DATA
+
+A:.WORD 4,-1,4,-9,3,-7,7,9
+SUM:.WORD 
+
+.TEXT
+LDR R0,=A
+LDR R1,=SUM
+MOV R3,#0
+MOV R4,#0
+
+BL LOOP
+    STR R4,[R1]
+    SWI 0X011
+
+LOOP:LDR R2,[R0],#4
+     MOVS R2,R2
+     BPL POSITIVE
+
+L1:ADD R3,R3,#1
+   CMP R3,#8
+   BNE LOOP
+   MOV PC,LR
+
+
+POSITIVE:ADD R4,R4,R2
+         B L1
+

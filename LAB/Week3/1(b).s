@@ -1,0 +1,29 @@
+.TEXT
+LDR R0,=A
+LDR R1,=B
+LDR R4,=C
+
+LDR R2,[R0]
+LDR R3,[R1]
+
+L: CMP R2,R3
+   BEQ RES
+   BLT LOOP
+   SUB R2,R2,R3
+   B L
+
+LOOP: SUB R3,R3,R2
+      B L
+
+RES: STR R2,[R4]
+
+SWI 0X011
+
+
+
+
+.DATA
+
+A:.WORD 125
+B:.WORD 25
+C:.WORD 
